@@ -17,8 +17,6 @@ function calculateWinner(squares) {
       squares[a] && squares[a] === squares[b] && squares[a] === squares[c]
   );
 
-  console.log(result);
-
   return result ? squares[result[0]] : null;
 }
 
