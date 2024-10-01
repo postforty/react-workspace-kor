@@ -7,8 +7,8 @@ function User({ user, onRemove, onToggle }) {
      * [props 또는 state 값] : 해당 값이 변경될 때 만 실행
      */
     useEffect(() => {
-        console.log("컴포넌트가 화면에 나타남");
-        console.log("useEffect 내에서 사용하는 사용자 정보: ", user.username, user.active)
+        // console.log("컴포넌트가 화면에 나타남");
+        // console.log("useEffect 내에서 사용하는 사용자 정보: ", user.username, user.active)
         return () => {
             console.log("컴포넌트가 화면에서 사라짐")
             console.log("useEffect 종료시 사용자 정보: ", user.username, user.active)
