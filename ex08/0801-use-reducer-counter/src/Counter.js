@@ -2,11 +2,11 @@ import React, { useReducer, useState } from 'react'
 
 // useState : 단순한 상태
 // - state : 상태 값
-// - setState : 상태 값 변경 메서드
+// - setState : 상태 값 변경 함수
 
 // useReducer : 복잡한 상태
 // - state : 상태 값
-// - dispatch : 상태 변경을 요청하는 메서드
+// - dispatch : 상태 변경을 요청하는 함수
 // - action : 변경할 내용, {type , payload}
 // - reducer : 상태를 변경하는 함수
 

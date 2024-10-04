@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useReducer, useRef, useState } from "react";
+import { useCallback, useMemo, useReducer, useRef } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
+import useInputs from "./hooks/useInputs";
 
 function countActiveUsers(users) {
   console.log("활성 사용자 수를 세는중...")
@@ -58,54 +59,61 @@ function reducer(state, action) {
         ...state,
         users: state.users.filter(user => user.id !== action.payload.id)
       };
+    default:
+      return state;
   }
-  return state;
 }
 
 function App() {
+  const [{username, email}, onChange, reset] = useInputs({
+    username: '',
+    email: ''
+  })
+
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { users, inputs: { username, email } } = state;
+  // const { users, inputs: { username, email } } = state;
+  const {users} = state;
   const nextId = useRef(4);
 
-  const onChange = useCallback(e => {
-      const { name, value } = e.target;
+  // const onChange = useCallback(e => {
+  //   const { name, value } = e.target;
 
-      dispatch({
-        type: 'CHANGE_INPUT',
-        payload: { name, value }
-      })
-    }, [])
+  //   dispatch({
+  //     type: 'CHANGE_INPUT',
+  //     payload: { name, value }
+  //   })
+  // }, [])
 
   // console.log("nextId>>>",nextId)
 
   const onCreate = useCallback(() => {
-      dispatch({
-        type: "CREATE_USER",
-        payload: {
-          id: nextId.current,
-          username,
-          email
-        }
-      })
-      nextId.current += 1;
-    }, [username, email])
-  
+    dispatch({
+      type: "CREATE_USER",
+      payload: {
+        id: nextId.current,
+        username,
+        email
+      }
+    })
+    nextId.current += 1;
+    reset();
+  }, [username, email])
 
   const onToggle = useCallback((id) => {
-      dispatch({
-        type: "TOGGLE_USER",
-        payload: { id }
-      })
-    }, [])
+    dispatch({
+      type: "TOGGLE_USER",
+      payload: { id }
+    })
+  }, [])
 
   const onRemove = useCallback((id) => {
-      dispatch({
-        type: "REMOVE_USER",
-        payload: { id }
-      })
-    }, [])
+    dispatch({
+      type: "REMOVE_USER",
+      payload: { id }
+    })
+  }, [])
 
-  const count = useMemo(()=> countActiveUsers(users), [users]);
+  const count = useMemo(() => countActiveUsers(users), [users]);
 
   return (
     <>
