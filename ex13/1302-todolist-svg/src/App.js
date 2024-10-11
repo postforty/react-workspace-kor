@@ -1,4 +1,4 @@
-import './App.css';
+import './assets/css/App.css';
 import TodoCreate from './TodoCreate';
 import TodoHead from './TodoHead';
 import TodoList from './TodoList';
