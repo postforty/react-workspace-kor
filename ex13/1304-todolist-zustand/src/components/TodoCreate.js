@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
 import "../assets/css/TodoCreate.css";
 import addIco from "../assets/svg/add.svg";
-import { useTodoDispatch, useTodoNextId } from "../context/TodoContext";
+import useTodoStore from '../hooks/useTodoStore';
 
 function TodoCreate() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState("");
 
-    const dispatch = useTodoDispatch();
-    const nextId = useTodoNextId();
-
-    // console.log("nextId>>>", nextId)
+    const { createTodo } = useTodoStore();
 
     const onToggle = () => setOpen(!open);
     const onChange = (e) => { setValue(e.target.value) };
     const onSubmit = (e) => {
         e.preventDefault(); // 새로고침 방지
-        dispatch({
-            type: "CREATE",
-            todo: {
-                id: nextId.current,
-                text: value,
-                done: false
-            }
-        });
+        createTodo(value)
         setValue("");
-        nextId.current++;
     };
 
     // console.log(value)

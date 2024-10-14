@@ -2,16 +2,15 @@ import React, { useState } from 'react'
 import "../assets/css/TodoItem.css"
 import { ReactComponent as CheckIcon } from "../assets/svg/check.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svg/delete.svg";
-import { useTodoDispatch } from '../context/TodoContext';
-
+import useTodoStore from '../hooks/useTodoStore';
 
 function TodoItem({ id, done, text }) {
-    const dispatch = useTodoDispatch();
-
     // console.log(id, done, text);
 
-    const onToggle = () => dispatch({ type: "TOGGLE", id });
-    const onRemove = () => dispatch({ type: "REMOVE", id });
+    const {toggleTodo, removeTodo} = useTodoStore();
+
+    const onToggle = () => toggleTodo(id);
+    const onRemove = () => removeTodo(id);
 
     const [hoveredDelete, setHoverdDelete] = useState(false);
     return (
