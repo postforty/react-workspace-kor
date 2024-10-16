@@ -1,7 +1,6 @@
 import "../assets/css/TodoList.css";
 import TodoItem from "./TodoItem";
 import useTodoStore from "../hooks/useTodoStore";
-import { fetchTodos } from "../services/api";
 import { useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -10,9 +9,22 @@ function TodoList() {
 
   // console.log(fetchTodos());
 
+  console.log(error);
+
   useEffect(() => {
     loadTodos();
   }, [loadTodos]);
+
+  if (error) {
+    return (
+      <div>
+        <div style={{ textAlign: "center" }}>
+          <span className="material-symbols-outlined">error</span>
+          불편을 드려 죄송합니다.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="todo-list">

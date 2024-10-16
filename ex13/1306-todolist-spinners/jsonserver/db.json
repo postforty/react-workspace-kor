@@ -3,12 +3,12 @@
     {
       "id": "1",
       "text": "할일1",
-      "done": false
+      "done": true
     },
     {
       "id": "2",
       "text": "할일2",
-      "done": false
+      "done": true
     },
     {
       "id": "3",
@@ -16,12 +16,12 @@
       "done": true
     },
     {
-      "id": "4",
+      "id": "fc9f",
       "text": "할일4",
-      "done": true
+      "done": false
     },
     {
-      "id": "b126",
+      "id": "561a",
       "text": "할일5",
       "done": false
     }
