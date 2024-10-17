@@ -5,7 +5,7 @@
       "text": "할일1",
       "create_date": "2024-10-10",
       "due_date": "2024-10-13",
-      "done_date": "",
+      "done_date": null,
       "done": false
     },
     {
@@ -13,7 +13,7 @@
       "text": "할일2",
       "create_date": "2024-10-16",
       "due_date": "2024-10-20",
-      "done_date": "",
+      "done_date": null,
       "done": false
     },
     {
@@ -21,8 +21,8 @@
       "text": "할일3",
       "create_date": "2024-10-15",
       "due_date": "2024-10-16",
-      "done_date": "",
-      "done": false
+      "done_date": null,
+      "done": true
     }
   ]
 }
