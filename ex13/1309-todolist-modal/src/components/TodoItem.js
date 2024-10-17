@@ -5,7 +5,7 @@ import { ReactComponent as DeleteIcon } from "../assets/svg/delete.svg";
 import useTodoStore from "../hooks/useTodoStore";
 import { toast } from "react-toastify";
 
-function TodoItem({ id, done, text, dueDate }) {
+function TodoItem({ id, done, text, dueDate, openModal }) {
   const { handleRemoveTodo, handleToggleTodo } = useTodoStore();
 
   const today = new Date();
@@ -34,6 +34,9 @@ function TodoItem({ id, done, text, dueDate }) {
           {text}
           <small>( ~ {dueDate}까지)</small>
         </div>
+      </div>
+      <div className="icon amend" onClick={() => openModal()}>
+        <span class="material-symbols-outlined">amend</span>
       </div>
       <div className="remove" onClick={() => handleRemoveTodo(id)}>
         <DeleteIcon
