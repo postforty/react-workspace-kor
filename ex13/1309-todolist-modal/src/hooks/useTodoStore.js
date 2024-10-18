@@ -4,6 +4,7 @@ import {
   toggleTodo,
   removeTodo,
   createTodo,
+  modifyTodo,
 } from "../services/api";
 
 const handleApiCall = async (set, apiFunction, onSuccess) => {
@@ -49,6 +50,14 @@ const useTodoStore = create((set) => ({
     await handleApiCall(
       set,
       () => createTodo(text, creationDate, dueDate),
+      () => useTodoStore.getState().loadTodos()
+    );
+  },
+
+  handleModifyTodo: async (id, text, dueDate) => {
+    await handleApiCall(
+      set,
+      () => modifyTodo(id, text, dueDate),
       () => useTodoStore.getState().loadTodos()
     );
   },

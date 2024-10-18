@@ -27,12 +27,20 @@ function TodoList() {
 
   // --- 모달 관련(시작) ---
   const [modalIsOpen, setIsOpen] = useState(false);
+  const { handleModifyTodo } = useTodoStore();
+
+  const [currentId, setCurrentId] = useState("");
   const [value, setValue] = useState("");
   const [dueDate, setDudeDate] = useState("");
-  const { handleCreateTodo } = useTodoStore();
 
-  function openModal() {
+  function openModal(id, text, dueDate) {
     setIsOpen(true);
+
+    // console.log(id, text, dueDate);
+
+    setCurrentId(id);
+    setValue(text);
+    setDudeDate(dueDate);
   }
 
   function closeModal() {
@@ -50,12 +58,12 @@ function TodoList() {
   const onSubmit = async (e) => {
     e.preventDefault(); // 새로고침 방지
 
-    const creationDate = new Date().toISOString().split("T")[0];
-
-    await handleCreateTodo(value, creationDate, dueDate);
+    await handleModifyTodo(currentId, value, dueDate);
 
     setValue("");
     setDudeDate("");
+
+    closeModal();
   };
   // --- 모달 관련(끝) ---
 
@@ -112,7 +120,7 @@ function TodoList() {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <h2>할일 수정</h2>
+          <h2>{currentId} 할일 수정</h2>
           <form className="insert-form" onSubmit={onSubmit}>
             <label htmlFor="dueDate">마감일을 선택하세요.</label>
             <input
@@ -128,8 +136,18 @@ function TodoList() {
               onChange={onChange}
               value={value}
             />
-            <button type="submit">수정</button>
-            <button onClick={closeModal}>취소</button>
+            <div
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <button type="submit" style={{ marginRight: "10px" }}>
+                수정
+              </button>
+              <button onClick={closeModal}>취소</button>
+            </div>
           </form>
         </Modal>
       </div>
