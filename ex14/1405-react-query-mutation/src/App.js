@@ -1,17 +1,24 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./App.css";
-import InfinitePeople from "./people/InfinitePeople";
+import Posts from "./Posts";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+// npm i @tanstack/react-query
+// npm i @tanstack/react-query-devtools
+
 const queryClient = new QueryClient();
+
+// console.log(queryClient);
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div>
-        <InfinitePeople />
+        <h1>
+          {"{"}JSON{"}"} Placeholder Blog
+        </h1>
+        <Posts />
       </div>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
