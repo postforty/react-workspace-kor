@@ -1,0 +1,59 @@
+.todo-head {
+  padding-top: 48px;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e9ecef;
+
+  h1 {
+    margin: 0;
+    font-size: 36px;
+    color: #343a40;
+  }
+
+  .day {
+    margin-top: 4px;
+    color: #868e96;
+    font-size: 21px;
+  }
+
+  .tasks-left {
+    color: #20c997;
+    font-size: 18px;
+    margin-top: 40px;
+    font-weight: bold;
+  }
+}
+
+.circle-config-button {
+  background: #38d9a9;
+  z-index: 5;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  position: absolute;
+  left: 50%;
+  top: -80px;
+  transform: translate(-50%, 50%);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  transition: 0.125s all ease-in;
+}
+
+.circle-config-button span {
+  font-size: 50px;
+}
+
+.circle-config-button:hover {
+  background: #63e6be;
+}
+
+.circle-config-button:active {
+  background: #20c997;
+}
