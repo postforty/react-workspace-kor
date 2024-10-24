@@ -1,10 +1,38 @@
-import React, { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchQuestions } from "../services/api";
 
 function QuestionBoard() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    queryClient.prefetchQuery({
+      queryKey: ["posts", nextPage],
+      queryFn: () => fetchQuestions(nextPage),
+    });
+  }, [currentPage, queryClient]);
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["posts", currentPage],
+    queryFn: () => fetchQuestions(currentPage),
+    staleTime: 2000,
+  });
+
+  if (isLoading) {
+    return <h3>loading...</h3>;
+  }
+
+  if (isError) {
+    return <h3>error : {error.message}</h3>;
+  }
+
+  console.log(data);
 
   return (
     <div className="container mx-auto p-4">
@@ -21,24 +49,18 @@ function QuestionBoard() {
               </tr>
             </thead>
             <tbody>
-              <tr
-                className="hover:bg-base-200 cursor-pointer"
-                onClick={() => navigate(`/detail/1`)}
-              >
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-              </tr>
-              <tr
-                className="hover:bg-base-200 cursor-pointer"
-                onClick={() => navigate(`/detail/1`)}
-              >
-                <th>2</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-              </tr>
+              {data.content.map((question) => (
+                <tr
+                  className="hover:bg-base-200 cursor-pointer"
+                  onClick={() => navigate(`/detail/${question.id}`)}
+                  key={question.id}
+                >
+                  <th>{question.id}</th>
+                  <td>{question.subject}</td>
+                  <td>{new Date(question.createDate).toLocaleDateString()}</td>
+                  <td>{question.answerList.length}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
