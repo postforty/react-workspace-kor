@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AddQuestion from "./components/AddQuestion";
 import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 import useUserStore from "./hook/useUserStore";
 
 const queryClient = new QueryClient();
@@ -32,7 +33,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {location.pathname !== "/signin" && (
+      {!(
+        location.pathname === "/signin" || location.pathname === "/signup"
+      ) && (
         <div className="navbar bg-neutral text-neutral-content flex justify-between">
           <div>
             <button className="btn btn-ghost text-xl">QnA</button>
@@ -54,7 +57,10 @@ function App() {
                 >
                   Sign in
                 </button>
-                <button className="text btn btn-sm btn-ghost btn-outline bg-white">
+                <button
+                  className="text btn btn-sm btn-ghost btn-outline"
+                  onClick={() => navigate("/signup")}
+                >
                   Sign up
                 </button>
               </>
@@ -80,6 +86,7 @@ function App() {
         <Route path="/" element={<QuestionBoard />} />
         <Route path="/create" element={<AddQuestion />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/detail/:questionId" element={<QuestionDetail />} />
         <Route
           path="*"

@@ -2,8 +2,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchQuestions } from "../services/api";
+import useUserStore from "../hook/useUserStore";
 
 function QuestionBoard() {
+  const {
+    user: { email },
+  } = useUserStore();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
@@ -52,7 +57,11 @@ function QuestionBoard() {
               {data.content.map((question) => (
                 <tr
                   className="hover:bg-base-200 cursor-pointer"
-                  onClick={() => navigate(`/detail/${question.id}`)}
+                  onClick={() =>
+                    email
+                      ? navigate(`/detail/${question.id}`)
+                      : navigate("/signin")
+                  }
                   key={question.id}
                 >
                   <th>{question.id}</th>

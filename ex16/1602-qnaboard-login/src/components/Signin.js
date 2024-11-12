@@ -91,7 +91,11 @@ const Signin = () => {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             계정이 없으신가요?{" "}
-            <a href="/register" className="text-blue-500">
+            <a
+              href="#!"
+              className="text-blue-500"
+              onClick={() => navigate("/signup")}
+            >
               회원가입
             </a>
           </p>
