@@ -6,7 +6,7 @@ export async function fetchQuestions(pageNum) {
   } = useUserStore.getState();
 
   const response = await fetch(
-    `http://localhost:8080/question/list?page=${pageNum - 1}`,
+    `http://3.39.178.18:8080/question/list?page=${pageNum - 1}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export async function fetchQuestionDetail(postId) {
   } = useUserStore.getState();
 
   const response = await fetch(
-    `http://localhost:8080/question/detail/${postId}`,
+    `http://3.39.178.18:8080/question/detail/${postId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export async function createQuestion(question) {
     user: { token },
   } = useUserStore.getState();
 
-  const response = await fetch(`http://localhost:8080/question/create`, {
+  const response = await fetch(`http://3.39.178.18:8080/question/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export async function createQuestion(question) {
 }
 
 export async function signin({ email, password }) {
-  const response = await fetch(`http://localhost:8080/auth/signin`, {
+  const response = await fetch(`http://3.39.178.18:8080/auth/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function signin({ email, password }) {
 }
 
 export async function signup({ username, email, password }) {
-  const response = await fetch(`http://localhost:8080/auth/signup`, {
+  const response = await fetch(`http://3.39.178.18:8080/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
